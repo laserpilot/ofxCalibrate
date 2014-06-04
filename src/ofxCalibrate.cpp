@@ -104,6 +104,8 @@ void ofxCalibrate::drawMiniCheckerboard(){
 }
 
 void ofxCalibrate::drawLines(bool horiz, int _spacing){
+    ofPushStyle();
+    
     ofPixels pixels;
     pixels.allocate(ofGetWidth(), ofGetHeight(), 3);
     
@@ -139,6 +141,24 @@ void ofxCalibrate::drawLines(bool horiz, int _spacing){
     image.setFromPixels(pixels.getPixels(), ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
     
     image.draw(0,0);
+    
+    //draw numbering
+    if(horiz){
+        for(int y = 0; y < ofGetWidth(); y++){
+            if (y%spacing==0 && spacing >25) {
+                ofSetColor(255);
+                ofDrawBitmapString(ofToString(y), 20,y);
+            }
+        }
+    }else{
+        for(int x = 0; x < ofGetWidth(); x++){
+            if (x%spacing==0 && spacing >25) {
+                ofSetColor(255);
+                ofDrawBitmapString(ofToString(x), x,20);
+            }
+        }
+    }
+    ofPopStyle();
 }
 
 void ofxCalibrate::drawGradientLines(bool horiz, bool animate, int _spacing){
@@ -202,15 +222,27 @@ void ofxCalibrate::drawSimpleGrid(int _spacing){
         }
     }
 
-    
-    
-    
-    
     ofImage image;
     image.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
     image.setFromPixels(pixels.getPixels(), ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
     
     image.draw(0,0);
+    
+
+    for(int x = 0; x < ofGetWidth(); x++){
+        if (x%spacing==0 && spacing >25) {
+            ofSetColor(255);
+            ofDrawBitmapString(ofToString(x), x,20);
+        }
+    }
+    
+    for(int y = 0; y < ofGetWidth(); y++){
+        if (y%spacing==0 && spacing >25) {
+            ofSetColor(255);
+            ofDrawBitmapString(ofToString(y), 20,y);
+        }
+    }
+    
 }
 
 void ofxCalibrate::drawFancyGrid(){
@@ -224,10 +256,10 @@ void ofxCalibrate::drawFancyGrid(){
     
     ofFill();
     ofSetColor(255, 0, 0,100);
-    ofRect(0,0,height, width);
+    ofRect(0,0,width, height/3);
     
     ofSetColor(0, 255, 0,100);
-    ofRect(0,0.33*height,width, height/3);
+    ofRect(0,height/3,width, height/3);
     
     ofSetColor(0, 0, 255,100);
     ofRect(0,height-(height/3),width, height/3);
@@ -237,10 +269,10 @@ void ofxCalibrate::drawFancyGrid(){
     ofLine(80, 0, 80, height);
     ofRect(0, 0, 80, height);
     ofSetColor(255, 255, 0);
-    ofRect(1200, 0, 80, height);
+    ofRect(width-80, 0, 80, height);
     ofNoFill();
     
-    
+    ofSetCircleResolution(40);
     ofSetColor(255);
     int spacing = 100;
     for (int i = 0; i<width; i=i+spacing) {
@@ -250,17 +282,19 @@ void ofxCalibrate::drawFancyGrid(){
         }
         else{
             ofNoFill();
-            ofCircle(i+1.5*spacing, width/2, spacing);
+            ofSetColor(255);
+            ofCircle(i+1.5*spacing, height/2, (height/3)/2);
+            ofRect(i+1.5*spacing, height/2, (height/3)/2,(height/3)/2);
+            ofRect(i+1.5*spacing-((height/3)/2), (height/2)- (height/3)/2, (height/3)/2,(height/3)/2);
             ofSetLineWidth(2);
             ofSetColor(100, 100, ofMap(i,0,width,0,255));
-            ofLine(i,0,i+spacing*3,width);
-            ofSetColor(4, 5, 6);
-            ofSetLineWidth(5);
+            ofLine(i,0,i+spacing*3,height);
+                        ofLine(i+spacing*3,0,i,height);
         }
         ofLine(i, 0, i, height);
         ofDrawBitmapString(ofToString(i), i+5,20);
     }
-    
+    //Text
     for (int i = 0; i<height; i=i+spacing) {
         if ((i/spacing)%3) {
             ofSetLineWidth(1);
@@ -272,13 +306,7 @@ void ofxCalibrate::drawFancyGrid(){
         ofDrawBitmapString(ofToString(i), 20,i+5);
         ofDrawBitmapString(ofToString(i), 200,i+5);
     }
-    
-    for(int i=1; i<3; i++){
-        ofSetLineWidth(5);
-        ofSetColor(255, 0, 0);
-        ofLine(i*(width/3), 0, i*(width/3), height);
-    }
-    
+
     ofPopStyle();
     
 }
