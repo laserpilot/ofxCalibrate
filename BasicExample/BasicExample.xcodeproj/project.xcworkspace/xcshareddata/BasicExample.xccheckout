@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>61B0F158-40D7-4E1E-90DC-1AE836DD2E41</string>
+	<string>D735C5FE-15CE-440A-824B-95142780EB01</string>
 	<key>IDESourceControlProjectName</key>
 	<string>BasicExample</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>3D65E2AF-BC8D-4298-912B-C3695DF8CBA9</key>
-		<string>https://github.com/laserpilot/ofxCalibrate.git</string>
+		<key>74A02EEF-FCF9-4525-804B-C3ECD7A872D9</key>
+		<string>https://github.com/laserpilot/ofxCalibrate</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>BasicExample/BasicExample.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>3D65E2AF-BC8D-4298-912B-C3695DF8CBA9</key>
+		<key>74A02EEF-FCF9-4525-804B-C3ECD7A872D9</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/laserpilot/ofxCalibrate.git</string>
+	<string>https://github.com/laserpilot/ofxCalibrate</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>3D65E2AF-BC8D-4298-912B-C3695DF8CBA9</string>
+	<string>74A02EEF-FCF9-4525-804B-C3ECD7A872D9</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>3D65E2AF-BC8D-4298-912B-C3695DF8CBA9</string>
+			<string>74A02EEF-FCF9-4525-804B-C3ECD7A872D9</string>
 			<key>IDESourceControlWCCName</key>
 			<string>ofxCalibrate</string>
 		</dict>

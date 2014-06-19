@@ -23,7 +23,6 @@ void ofxCalibrate::drawCheckerBoard(){
                 ofSetColor(0);
                 ofRect(i+squareSize, j, squareSize, squareSize);
             }
-            
         }
         counter++;
     }
@@ -35,8 +34,6 @@ void ofxCalibrate::drawCheckerBoardAnim(){
     int height=ofGetHeight();
     int squareSize = 30;
     int counter=0;
-    
-
     
     ofPushStyle();
     for (int j=0; j<height;j=j+squareSize) {
@@ -79,6 +76,7 @@ void ofxCalibrate::drawCheckerBoardAnim(){
 }
 
 void ofxCalibrate::drawMiniCheckerboard(){
+        //This one will murder your FPS - use sparingly or only during calibration
     ofPixels pixels;
     pixels.allocate(ofGetWidth(), ofGetHeight(), 3);
     
@@ -104,6 +102,7 @@ void ofxCalibrate::drawMiniCheckerboard(){
 }
 
 void ofxCalibrate::drawLines(bool horiz, int _spacing){
+        //This one will murder your FPS - use sparingly or only during calibration
     ofPushStyle();
     
     ofPixels pixels;
@@ -161,12 +160,12 @@ void ofxCalibrate::drawLines(bool horiz, int _spacing){
     ofPopStyle();
 }
 
-void ofxCalibrate::drawGradientLines(bool horiz, bool animate, int _spacing){
+void ofxCalibrate::drawGradientLines(bool horiz, bool animate){
+    //This one will murder your FPS - use sparingly or only during calibration
     ofPixels pixels;
     pixels.allocate(ofGetWidth(), ofGetHeight(), 3);
     
-    int spacing = _spacing;
-    spacing = ofClamp(spacing, 2, 2000);
+    int spacing = 1;
     
     int timer=0;
     if (animate) {
@@ -198,6 +197,92 @@ void ofxCalibrate::drawGradientLines(bool horiz, bool animate, int _spacing){
     
     
     ofImage image;
+    image.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
+    image.setFromPixels(pixels.getPixels(), ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
+    
+    image.draw(0,0);
+}
+
+void ofxCalibrate::drawColorGradientLines(bool horiz, bool animate){
+    //This one will murder your FPS - use sparingly or only during calibration
+    //Would be best in a shader
+    ofPixels pixels;
+    pixels.allocate(ofGetWidth(), ofGetHeight(), 3);
+    
+    int spacing = 1;
+    
+    int timer=0;
+    if (animate) {
+        timer = 100*ofGetElapsedTimef();
+    }
+    
+    ofColor temp = ofColor(255,0,0);
+    
+    if (horiz) {
+        for(int y = 0; y < ofGetHeight(); y++){
+            for(int x = 0; x < ofGetWidth(); x++){
+                    temp.setHue(((y+timer)%255));
+                    pixels.setColor(x, y, temp);
+            }
+        }
+    }else{
+        for(int y = 0; y < ofGetHeight(); y++){
+            for(int x = 0; x < ofGetWidth(); x++){
+                temp.setHue(((x+timer)%255));
+                pixels.setColor(x, y, temp);
+            }
+        }
+    }
+    
+    
+    
+    ofImage image;
+    image.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
+    image.setFromPixels(pixels.getPixels(), ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
+    
+    image.draw(0,0);
+}
+
+void ofxCalibrate::drawFloatGradientLines(bool horiz, bool animate){
+    
+    //This one will murder your FPS - use sparingly or only during calibration
+    //Would be better to do this in a shader
+    ofFloatPixels pixels;
+    pixels.allocate(ofGetWidth(), ofGetHeight(), 3);
+    
+    int spacing = 1;
+   
+    
+    int timer=0;
+    if (animate) {
+        timer = 100*ofGetElapsedTimef();
+    }
+    
+    if (horiz) {
+        for(int y = 0; y < ofGetHeight(); y++){
+            for(int x = 0; x < ofGetWidth(); x++){
+                if (y%spacing==0) {
+                    pixels.setColor(x, y, ofFloatColor((float)((y+timer)%1000)/ofGetHeight()));
+                }else{
+                    pixels.setColor(x, y, ofFloatColor((float)((y+timer)%1000)/ofGetHeight()) );
+                }
+            }
+        }
+    }else{
+        for(int y = 0; y < ofGetHeight(); y++){
+            for(int x = 0; x < ofGetWidth(); x++){
+                if (x%spacing==0) {
+                    pixels.setColor(x, y, ofFloatColor((float)((x+timer)%ofGetWidth())/ofGetWidth()));
+                }else{
+                    pixels.setColor(x, y, ofFloatColor((float)((x+timer)%ofGetWidth())/ofGetWidth()));
+                }
+            }
+        }
+    }
+    
+    
+    
+    ofFloatImage image;
     image.allocate(ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
     image.setFromPixels(pixels.getPixels(), ofGetWidth(), ofGetHeight(), OF_IMAGE_COLOR);
     

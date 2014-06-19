@@ -7,7 +7,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
+    ofSetWindowTitle(ofToString(ofGetFrameRate()));
 }
 
 //--------------------------------------------------------------
@@ -27,15 +27,27 @@ void ofApp::draw(){
     }else if(whichCalib==5){
         calibrate.drawSimpleGrid(ofMap(mouseX, 0, ofGetWidth(), 2,200));
     }else if(whichCalib==6){
-        calibrate.drawGradientLines(ofGetMousePressed(), true, ofMap(mouseX, 0, ofGetWidth(), 2,200));
+        calibrate.drawGradientLines(ofGetMousePressed(), true);
+    }else if(whichCalib==7){
+        calibrate.drawFloatGradientLines(ofGetMousePressed(), false);
+    }else if(whichCalib==8){
+        calibrate.drawColorGradientLines(ofGetMousePressed(), false);
     }
+
+
 
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    if(key==' '){
     whichCalib++;
-    whichCalib = ofWrap(whichCalib, 0, 7);
+    whichCalib = ofWrap(whichCalib, 0, 9);
+    }
+    
+    if(key=='f'){
+        ofToggleFullscreen();
+    }
 }
 
 //--------------------------------------------------------------

@@ -11,7 +11,9 @@ class ofxCalibrate : public ofBaseApp{
         void drawFancyGrid();
         void drawSimpleGrid(int _spacing);
         void drawLines(bool horiz, int _spacing);
-            void drawGradientLines(bool horiz, bool animate, int _spacing);
+        void drawGradientLines(bool horiz, bool animate);
+        void drawColorGradientLines(bool horiz, bool animate);
+        void drawFloatGradientLines(bool horiz, bool animate);
         void drawGradient();
 		
 //		void keyPressed(int key);
